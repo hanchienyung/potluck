@@ -1,9 +1,7 @@
 package com.cy.example.demo.Model;
 
-import com.cy.example.demo.Model.Pledgeditem;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,8 +26,6 @@ public class AppUser {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="enabled")
-    private boolean enabled;
 
     @Column(name="username")
     private String username;
@@ -45,8 +41,31 @@ public class AppUser {
     private Set<AppRole> roles;
 
 
+
     @ManyToMany
-    private Set<Pledgeditem> userDish;
+    private Set<PledgedItem> pledgedItems;
+
+    public AppUser() {
+        this.roles = new HashSet<>();
+        this.pledgedItems = new HashSet();
+    }
+
+    public AppUser(String email, String password, String firstName, String lastName, String username) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.roles = new HashSet<>();
+        this.pledgedItems = new HashSet<>();
+    }
+
+    public void addRole(AppRole role) { this.roles.add(role);}
+
+
+    public void addPledgedItem(PledgedItem pledgedItem) {
+        this.pledgedItems.add(pledgedItem);
+    }
 
     public long getId() {
         return id;
@@ -88,13 +107,7 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     public String getUsername() {
         return username;
@@ -112,12 +125,12 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public Set<Pledgeditem> getUserDish() {
-        return userDish;
+    public Set<PledgedItem> getPledgedItems() {
+        return pledgedItems;
     }
 
-    public void setUserDish(Set<Pledgeditem> userDish) {
-        this.userDish = userDish;
+    public void setPledgedItems(Set<PledgedItem> pledgedItems) {
+        this.pledgedItems = pledgedItems;
     }
 }
 

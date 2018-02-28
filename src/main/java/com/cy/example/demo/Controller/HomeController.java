@@ -1,3 +1,4 @@
+/*
 package com.cy.example.demo.Controller;
 
 
@@ -19,7 +20,7 @@ public class HomeController {
     AppUserRepository userRepository;
 
     @Autowired
-    PledgeditemRepository pledgeditemRepository;
+    PledgedItemRepository pledgeditemRepository;
 
     @RequestMapping("/")
     public String showIndex(Model model, Authentication auth)
@@ -36,7 +37,9 @@ public class HomeController {
 
                 // TODO: 2/23/2018
                 //If(thisUser.hasRole("RECRUITER"))
-                /* Show the LIST JOBS page, otherwise show the index page.*/
+                */
+/* Show the LIST JOBS page, otherwise show the index page.*//*
+
 
             }
         }
@@ -244,4 +247,4 @@ public class HomeController {
         model.addAttribute("joblist",matchingJobs);
         return "viewsuggestedjobs";
     }
-}
+}*/

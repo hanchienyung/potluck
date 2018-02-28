@@ -14,7 +14,7 @@ public class AppRole {
     private long id;
 
     @Column(unique=true)
-    private String role;
+    private String roleName;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     //private Collection<com.cy.example.demo.Models.User> users;
@@ -28,6 +28,12 @@ public class AppRole {
         this.users = new HashSet<>();
     }
 
+    public AppRole(String roleName) {
+        this.roleName = roleName;
+        this.users = new HashSet <>();
+
+    }
+
 
     public long getId() {
         return id;
@@ -37,12 +43,12 @@ public class AppRole {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public Set<AppUser> getUsers() {

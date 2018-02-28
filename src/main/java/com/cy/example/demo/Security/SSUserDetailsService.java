@@ -51,7 +51,7 @@ public class SSUserDetailsService implements UserDetailsService {
     private Set<GrantedAuthority> getAuthorities(AppUser user) {
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         for (AppRole role : user.getRoles()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
             authorities.add(grantedAuthority);
         }
         System.out.println("User authorities are " + authorities.toString());
