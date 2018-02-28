@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<th:block th:replace="fragment::top"></th:block>
+<head>
+    <div th:replace="fragment :: top"></div>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+
+<div th:replace="fragment :: navbar"></div>
+
+<div class="body-content">
+    <div class="col-sm">
+        <h1>Add Pledge Items</h1>
+        <form class="form" action="#" th:action="@{/addpledgeditem}" th:object="${pledgeditem}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <label >Pledge Item</label>
+            <span th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></span>
+            <input type="text" placeholder="Pledged Item" class="form-control" th:field="*{itemName}">
+
+            <label >Pledge Item Type</label>
+            <span th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}"></span>
+            <input type="text" placeholder="Pledged Item Type" class="form-control" th:field="*{itemType}">
+
+            <label >Serving</label>
+            <span th:if="${#fields.hasErrors('serving')}" th:errors="*{serving}"></span>
+            <input type="text" placeholder="Serving"class="form-control" th:field="*{serving}">
+
+            <input type="submit" value="Save" name="save" class="btn btn-block btn-primary" />
+
+
+            <form th:action="@{/addusertopledg}" th:method="post">
+                <td><button class="btn btn-default" name="pledgid" th:value="${pledgeditem.id}">Add User</button></td>
+
+            <div th:each="eachUser:${users}">
+                <button class="btn btn-default" type="submit" name="userid" th:value="${eachUser.id}" th:text="${eachUser.firstName}"></button>
+            </div>
+            </form>
+
+        </form>
+    </div>
+</div>
+
+<section>
+    <span th:replace="fragment::bootstrap4js"></span>
+</section>
+</body>
+</html>
+

@@ -1,5 +1,6 @@
 package com.cy.example.demo.Security;
 
+import com.cy.example.demo.Model.AppUserRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -65,12 +66,12 @@ import static org.hibernate.criterion.Restrictions.and;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //WebSecruityConfigurerAdapter: http portocol to close off routes
-    @Autowired
-    private SSUserDetailsService userDetailsService;
+  //  @Autowired
+ //   private SSUserDetailsService userDetailsService;
 //    These people have access from our database
 
     @Autowired
-    private com.cy.example.demo.Model.AppUserRepository userRepository;
+    private AppUserRepository userRepository;
 
 //    Overriding Spring security and passing in Service to look for userrepository database
 //    Get results of current user and what thier rights are
@@ -88,13 +89,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                .antmatchers: if you have a route you want to block off
 //                .permitall: dont need access pages everyone one can acees this route example:register
-                .antMatchers("/","/h2-console/**","/register","/addproduct","/listproduct","/productsdetail/**","/productupdate/**","/productdelete/**","/assets/**","/listcustomers").permitAll()
+                .antMatchers("/","/h2-console/**","/register","/listpledgeditem", "/addpledgeditem/**","/assets/**","/css/**").permitAll()
 
-
-
+               // .antMatchers("/addpledgeditem").access("hasAuthority('USER, ADMIN')")
 
 //                .access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-                .antMatchers("/admin").access("hasAuthority('ADMIN')")
+                .antMatchers("/admin", "/removepledgeditem/**").access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

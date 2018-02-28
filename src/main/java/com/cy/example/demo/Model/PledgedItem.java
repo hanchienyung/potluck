@@ -19,7 +19,8 @@ public class PledgedItem {
 
     private String serving;
 
-    @ManyToMany(mappedBy="pledgedItems", fetch = FetchType.LAZY)
+    //@ManyToMany(mappedBy="pledgedItems", fetch = FetchType.LAZY)
+    @ManyToMany
     private Set<AppUser> users;
 
 
@@ -34,6 +35,7 @@ public class PledgedItem {
         this.users = new HashSet<>();
     }
 
+    public void addUsertoPledge(AppUser aAppUser) {this.users.add(aAppUser);}
 
     public long getId() {
         return id;

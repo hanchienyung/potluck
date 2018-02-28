@@ -42,7 +42,7 @@ public class AppUser {
 
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
     private Set<PledgedItem> pledgedItems;
 
     public AppUser() {

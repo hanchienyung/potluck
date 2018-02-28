@@ -3,6 +3,7 @@ package com.cy.example.demo.Security;
 
 import com.cy.example.demo.Model.AppRole;
 import com.cy.example.demo.Model.AppUser;
+import com.cy.example.demo.Model.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,9 +22,9 @@ import java.util.Set;
 @Service
 public class SSUserDetailsService implements UserDetailsService {
 
-    private com.cy.example.demo.Model.AppUserRepository userRepository;
+    private AppUserRepository userRepository;
 
-    public SSUserDetailsService(com.cy.example.demo.Model.AppUserRepository AppuserRepository) {
+    public SSUserDetailsService(AppUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

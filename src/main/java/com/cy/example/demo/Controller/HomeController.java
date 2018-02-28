@@ -2,10 +2,7 @@
 package com.cy.example.demo.Controller;
 
 
-import com.cy.example.demo.Model.AppRoleRepository;
-import com.cy.example.demo.Model.AppUser;
-import com.cy.example.demo.Model.AppUserRepository;
-import com.cy.example.demo.Model.PledgedItemRepository;
+import com.cy.example.demo.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,42 +27,125 @@ public class HomeController {
     PledgedItemRepository pledgeditemRepository;
 
     @RequestMapping("/")
-    public String addpledgeditem(Model model)
-    {
-        return "addpledgeditem";
+    public String mainpage(Model model){
+        return "mainpage";
     }
 
-    @RequestMapping("/loggedin")
-    public String loggedIn(Model model)
+    @RequestMapping("/login")
+    public String login(Model model)
     {
-        return "loggedin";
+        return "login";
 
     }
 
-    @RequestMapping("/listpledgeitem")
+    @RequestMapping("/logout")
+    public String logout(Model model)
+    {
+        return "mainpage";
+
+    }
+
+    @RequestMapping("/listpledgeditem")
     public String listpledgeditem(Model model)
     {
+        model.addAttribute("pledgeditems",pledgeditemRepository.findAll());
+      //  model.addAttribute("users",userRepository.findAll());
         return "listpledgeditem";
     }
 
     @GetMapping("/register")
     public String registerUser(Model model)
     {
-        model.addAttribute("newuser",new AppUser());
-        return "register";
+        model.addAttribute("user",new AppUser());
+        return "registration";
     }
 
     @PostMapping("/register")
-    public String saveUser(@Valid @ModelAttribute("newuser") AppUser user, BindingResult result, HttpServletRequest request)
+    public String saveUser(@Valid @ModelAttribute("user") AppUser user, BindingResult result, HttpServletRequest request)
     {
         if(result.hasErrors())
         {
-            return "register";
+            return "registration";
         }
 
         userRepository.save(user);
         return "redirect:/";
     }
+
+    @RequestMapping("/addpledgeditem")
+    public String addpledgeditem(Model model, PledgedItem pledgedItem)
+    {
+        model.addAttribute("users",userRepository.findAll());
+        model.addAttribute("pledgeditem", new PledgedItem());
+        return "addpledgeditem";
+    }
+
+    @PostMapping("/addpledgeditem")
+    public String addpledgeditem(Model model, BindingResult result, PledgedItem pledgedItem)
+    {
+        if(result.hasErrors())
+        {
+            return "addpledgeditem";
+        }
+   /*     model.addAttribute("users",userRepository.findAll());*/
+        pledgeditemRepository.save(pledgedItem);
+        return "addpledgeditem";
+    }
+
+    @RequestMapping("/addusertopledg")
+    public String addusertopledg(HttpServletRequest request, Model model)
+    {
+        String pledgid = request.getParameter("pledgid");
+        model.addAttribute("newpledg", pledgeditemRepository.findOne(new Long(pledgid)));
+        model.addAttribute("users",userRepository.findAll());
+
+        return "addusertopledg";
+    }
+
+    @PostMapping("/savesusertopledg")
+    public String saveusertopledg(HttpServletRequest request, @ModelAttribute("newpledg") PledgedItem pledgedItem)
+    {
+        String userid = request.getParameter("userid");
+        System.out.println("Pledgeid from add user to pledge:"+pledgedItem.getId()+" User id:"+userid);
+        pledgedItem.addUsertoPledge(userRepository.findOne(new Long(userid)));
+        pledgeditemRepository.save(pledgedItem);
+        return "redirect:/listpledgeditem";
+    }
+
+
+    @GetMapping("/search")
+    public String getSearch(){
+        return "searchform";
+    }
+
+   /*
+    @PostMapping("/search")
+    public String searchpledgeditem(HttpServletRequest request, Model model)
+    {
+        String searchItems = request.getParameter(("search");
+        model.addAttribute("search", )
+
+        model.addAttribute("pledgeditems",pledgeditemRepository.findAllByItemName());
+
+
+        return "searchpledgeditem";
+    }
+
+
+
+
+    @PostMapping("/search")
+    public String showSearchResults(HttpServletRequest request, Model model){
+        String searchProducts = request.getParameter("search");
+        model.addAttribute("search",searchProducts);
+//
+
+//        Expecting multiple parameters or else will throw No parameter available Need to pass as many as are in constructor in Entity.
+        model.addAttribute("productsearch",productRepository.findAllByProductNameContainingIgnoreCase(searchProducts));
+//
+        return "searchproductlist";
+    }
+
 
     /*
 

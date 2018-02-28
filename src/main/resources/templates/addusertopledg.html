@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Users to Pledge</title>
+</head>
+<body>
+<form th:action="@{/savesusertopledg}" th:object="${newpledg}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{itemName}">
+    <input type="text" th:field="*{itemType}">
+    <input type="text" th:field="*{serving}">
+    <input type="text" th:field="*{users}">
+    <div th:each="eachUser:${users}">
+        <button class="btn btn-default" type="submit" name="userid" th:value="${eachUser.id}" th:text="${eachUser.username}"></button>
+    </div>
+
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

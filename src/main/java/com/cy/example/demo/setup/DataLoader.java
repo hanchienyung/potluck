@@ -52,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
         user3.addRole(myUserRole);
         appuserRepository.save(user3);
 
-        AppUser user4 = new AppUser("rod@williams.com", "password", "Rod", "Williams", "williamsrod");
+        AppUser user4 = new AppUser("rod@williams.com", "password", "Rod", "Williams", "williamsr");
         user4.addRole(myUserRole);
         appuserRepository.save(user4);
 
