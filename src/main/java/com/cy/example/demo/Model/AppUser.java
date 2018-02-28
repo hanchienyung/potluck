@@ -60,6 +60,7 @@ public class AppUser {
         this.pledgedItems = new HashSet<>();
     }
 
+
     public void addRole(AppRole role) { this.roles.add(role);}
 
 

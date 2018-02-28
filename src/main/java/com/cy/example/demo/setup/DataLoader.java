@@ -30,33 +30,34 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         System.out.println("Loading data...");
 
+        AppRole myUserRole = new AppRole("USER");
+        approleRepository.save(myUserRole);
+
+        AppRole myAdminRole = new AppRole("ADMIN");
+        approleRepository.save(myAdminRole);
+
         // Add user roles
-        approleRepository.save(new AppRole("USER"));
-        approleRepository.save(new AppRole("ADMIN"));
-
-
-
-        // Add users
         AppUser user1 = new AppUser("bob@burger.com", "password", "Bobby", "Burger", "burgerb");
-        user1.addRole(approleRepository.findAppRoleByRoleName("USER"));
+        user1.addRole(myUserRole);
+
         appuserRepository.save(user1);
 
 
 
         AppUser user2 = new AppUser("jane@virgin.com", "password", "Jane", "Virgin", "virginj");
-        user2.addRole(approleRepository.findAppRoleByRoleName("USER"));
+        user2.addRole(myUserRole);
         appuserRepository.save(user2);
 
         AppUser user3 = new AppUser("mike@smith.com", "password", "Mike", "Smith", "smithm");
-        user3.addRole(approleRepository.findAppRoleByRoleName("USER"));
+        user3.addRole(myUserRole);
         appuserRepository.save(user3);
 
         AppUser user4 = new AppUser("rod@williams.com", "password", "Rod", "Williams", "williamsrod");
-        user4.addRole(approleRepository.findAppRoleByRoleName("USER"));
+        user4.addRole(myUserRole);
         appuserRepository.save(user4);
 
         AppUser user5 = new AppUser("larry@black.com", "password", "Larry", "Black", "blackl");
-        user5.addRole(approleRepository.findAppRoleByRoleName("ADMIN"));
+        user5.addRole(myAdminRole);
         appuserRepository.save(user5);
 
 

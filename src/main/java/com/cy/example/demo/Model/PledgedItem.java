@@ -17,8 +17,6 @@ public class PledgedItem {
 
     private String itemType;
 
-    //private String username;
-
     private String serving;
 
     @ManyToMany(mappedBy="pledgedItems", fetch = FetchType.LAZY)
