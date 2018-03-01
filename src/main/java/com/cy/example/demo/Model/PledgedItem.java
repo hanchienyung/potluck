@@ -76,4 +76,14 @@ public class PledgedItem {
     public void setUsers(Set<AppUser> users) {
         this.users = users;
     }
+
+    @Override
+    public String toString() {
+        return "PledgeItems{" +
+                "id=" + id +
+                ", pledgeName='" + itemName + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", serving=" + serving +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package com.cy.example.demo.Controller;
 
 
 import com.cy.example.demo.Model.*;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,7 +82,7 @@ public class HomeController {
     }
 
     @PostMapping("/addpledgeditem")
-    public String addpledgeditem(Model model, BindingResult result, PledgedItem pledgedItem)
+    public String addpledgeditem(@Valid @ModelAttribute("aPledge") PledgedItem pledgedItem, BindingResult result)
     {
         if(result.hasErrors())
         {
@@ -89,7 +90,9 @@ public class HomeController {
         }
    /*     model.addAttribute("users",userRepository.findAll());*/
         pledgeditemRepository.save(pledgedItem);
-        return "addpledgeditem";
+        //AppUser currUser = userRepository.findUserByUsername(auth.getName());
+        //return "addpledgeitem";
+        return "redirect:/";
     }
 
     @RequestMapping("/addusertopledg")

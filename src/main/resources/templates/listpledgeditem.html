@@ -14,8 +14,8 @@
         <th>Item Name</th>
         <th>Item Type</th>
         <th>Serving</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Add User</th>
+        <th>UserName</th>
     </tr>
     <tr th:each="pledgeditem : ${pledgeditems}">
         <td data-th="Item Name" th:text="${pledgeditem.itemName}"></td>
@@ -36,21 +36,6 @@
 
 </table>
 
-<!--
-
-<section>
-
-    <div class="container-fluid text-center">
-
-        <div  class="row content">
-            <div class="col-sm-6" th:each="pledgeditem : ${pledgeditems}">
-            <div th:text="${pledgeditem.itemName}"></div>
-            <div th:text="${pledgeditem.itemType}"></div>
-            <div th:text="${pledgeditem.serving}"></div>
-        </div>
-    </div><!-- /.container
-</section>
--->
 
 <section>
     <span th:replace="fragment::bootstrap4js"></span>
