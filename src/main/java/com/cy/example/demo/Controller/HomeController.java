@@ -88,10 +88,7 @@ public class HomeController {
         {
             return "addpledgeditem";
         }
-   /*     model.addAttribute("users",userRepository.findAll());*/
         pledgeditemRepository.save(pledgedItem);
-        //AppUser currUser = userRepository.findUserByUsername(auth.getName());
-        //return "addpledgeitem";
         return "redirect:/";
     }
 
